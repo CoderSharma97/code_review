@@ -9,22 +9,28 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [code, setCode] = useState(` function average(x,y) {
   return x+y/2;
 }`);
-
   const [review, setReview] = useState(``);
+  const [loading, setLoading] = useState(false); // 🔥 Loading state added
 
   useEffect(() => {
     prism.highlightAll();
   }, []);
 
   async function reviewCode() {
-    const response = await axios.post("https://lms-server-4xuv.onrender.com/ai/get-review", {
-      code,
-    });
-    setReview(response.data);
+    setLoading(true); // Show loading indicator
+    try {
+      const response = await axios.post("https://lms-server-4xuv.onrender.com/ai/get-review", {
+        code,
+      });
+      setReview(response.data);
+    } catch (error) {
+      setReview("⚠️ Error fetching review. Please try again.");
+    } finally {
+      setLoading(false); // Hide loading indicator
+    }
   }
 
   return (
@@ -49,12 +55,21 @@ function App() {
               }}
             />
           </div>
-          <div onClick={reviewCode} className="review">
-            Review
-          </div>
+          <button 
+            onClick={reviewCode} 
+            className="review"
+            disabled={loading} // Disable button when loading
+            style={{ opacity: loading ? 0.5 : 1, cursor: loading ? "not-allowed" : "pointer" }}
+          >
+            {loading ? "Reviewing..." : "Review"}
+          </button>
         </div>
         <div className="right">
-          <Markdown rehypePlugins={[rehypeHighlight]}>{review}</Markdown>
+          {loading ? (
+            <p>⏳ Generating review...</p> // 🔥 Show loading text
+          ) : (
+            <Markdown rehypePlugins={[rehypeHighlight]}>{review}</Markdown>
+          )}
         </div>
       </main>
     </>
