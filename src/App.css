@@ -1,0 +1,150 @@
+/* Reset and Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0d1b2a, #1b263b);
+  color: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Main Layout */
+main {
+  display: flex;
+  gap: 2rem;
+  width: 90%;
+  max-width: 1300px;
+  height: 80vh;
+}
+
+/* Left Section (Code Editor) */
+.left {
+  flex-basis: 55%;
+  background: rgba(20, 20, 30, 0.85);
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 238, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+/* Code Editor */
+.code {
+  flex-grow: 1;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(0, 238, 255, 0.2);
+}
+
+/* Code Editor Styling */
+.code textarea,
+.code pre {
+  background: transparent !important;
+  color: #00eaff !important;
+  font-size: 1.2rem !important;
+  line-height: 1.5;
+  font-family: "Fira Code", monospace;
+}
+
+/* Review Button */
+.review {
+  background: linear-gradient(135deg, #00eaff, #0088ff);
+  color: #0f172a;
+  padding: 0.8rem 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0.7rem;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0px 5px 15px rgba(0, 238, 255, 0.4);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.review:hover {
+  background: linear-gradient(135deg, #0088ff, #00eaff);
+  transform: scale(1.05);
+}
+
+/* Right Section (Markdown Review) */
+.right {
+  flex-basis: 45%;
+  background: rgba(30, 40, 60, 0.9);
+  border-radius: 1rem;
+  padding: 2rem;
+  font-size: 1.3rem;
+  color: #ffffff;
+  overflow-y: auto;
+  line-height: 1.8;
+  box-shadow: 0 0 15px rgba(255, 0, 200, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Markdown Styling */
+.right h1,
+.right h2,
+.right h3 {
+  color: #ff00ff;
+  margin-bottom: 0.8rem;
+}
+
+.right p {
+  color: #e5e7eb;
+}
+
+.right code {
+  background: rgba(255, 0, 200, 0.2);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #ff00ff;
+  font-weight: bold;
+}
+
+/* Scrollbar Styling */
+.right::-webkit-scrollbar {
+  width: 10px;
+}
+
+.right::-webkit-scrollbar-thumb {
+  background: #ff00ff;
+  border-radius: 5px;
+}
+
+.right::-webkit-scrollbar-thumb:hover {
+  background: #ff66ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    width: 95%;
+    height: auto;
+  }
+
+  .left,
+  .right {
+    flex-basis: auto;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .review {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
